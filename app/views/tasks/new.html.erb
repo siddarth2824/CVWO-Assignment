@@ -1,0 +1,35 @@
+<h1>Add a To-do Task</h1>
+
+<%= form_with scope: :task, url: tasks_path, local: true do |form| %>
+
+    <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@task.errors.count, "error") %>
+    prohibited
+        this to-do task from being saved:
+        </h2>
+        <ul>
+            <% @task.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+        <%= form.label :item %><br>
+        <%= form.text_field :item %>
+    </p>
+
+    <p>
+        <%= form.label :description %><br>
+        <%= form.text_area :description %>
+    </p>
+
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>
+
+<%= link_to 'Back', tasks_path %>
