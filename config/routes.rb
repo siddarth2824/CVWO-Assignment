@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  
-  resources :tasks
+  root 'tasks#index'
 
-  root 'welcome#index'
+  resources :tasks 
+  resources :tags
+  
 end
 

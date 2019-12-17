@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
     def index
+        if params[:tag]
+            @tasks = Task.tagged_with(params[:tag])
+        else
         @tasks = Task.all 
+        end
     end
 
     def show
@@ -44,6 +48,6 @@ class TasksController < ApplicationController
     
     private 
         def task_params
-            params.require(:task).permit(:item, :description)
+            params.require(:task).permit(:item, :description, :tag_list)
         end
 end
