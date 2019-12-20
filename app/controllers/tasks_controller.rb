@@ -3,16 +3,16 @@ class TasksController < ApplicationController
         if params[:tag]
             @tasks = Task.tagged_with(params[:tag])
         else
-        @tasks = Task.all 
+        @tasks = current_user.tasks.all 
         end
     end
 
     def show
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
     end
 
     def new
-        @task = Task.new
+        @task = current_user.tasks.build
     end
 
     def edit
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new(task_params)
+        @task = current_user.tasks.build(task_params)
 
         if @task.save
         redirect_to @task

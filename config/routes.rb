@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'tasks#index'
+  devise_for :users
+  root 'welcome#index'
 
   resources :tasks 
   resources :tags
