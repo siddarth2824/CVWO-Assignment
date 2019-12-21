@@ -15,5 +15,12 @@
    <% end %>
 </p>
 
+<p>
+    <strong>Due Date:</strong>
+    <%= @task.due %>
+</p>
+
+<%= link_to 'Mark as Complete', complete_task_path,
+                    method: :patch %>
 <%= link_to 'Edit', edit_task_path(@task) %>
 <%= link_to 'Back', tasks_path %>

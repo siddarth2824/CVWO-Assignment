@@ -3,17 +3,39 @@
 <%= link_to 'Create New To-do Task', new_task_path %>
 <%= link_to 'Back to Homepage', root_path %>
 
+<h2>Uncompleted Tasks</h2>
+
 <table>
     <tr>
         <th>Item</th>
-        <th>Description</th>
         <th></th>
     </tr>
 
-    <% @tasks.each do |task| %>
+    <% @incomplete_tasks.each do |task| %>
         <tr>
             <td><%= task.item %></td>
-            <td><%= task.description %></td>
+            <td><%= link_to 'Show', task_path(task) %></td>
+            <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            <td><%= link_to 'Mark as Complete', complete_task_path(task),
+                    method: :patch %></td>
+            <td><%= link_to 'Destroy', task_path(task),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+</table>
+
+<h2>Completed Tasks</h2>
+
+<table>
+    <tr>
+        <th>Item</th>
+        <th></th>
+    </tr>
+
+    <% @complete_tasks.each do |task| %>
+        <tr>
+            <td><%= task.item %></td>
             <td><%= link_to 'Show', task_path(task) %></td>
             <td><%= link_to 'Edit', edit_task_path(task) %></td>
             <td><%= link_to 'Destroy', task_path(task),

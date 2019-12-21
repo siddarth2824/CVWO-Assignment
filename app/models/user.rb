@@ -4,5 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :tasks
+  require 'chronic'
+  
+  has_many :tasks do
+    def today 
+      find(:all, :conditions => ["due = ? and complete is null", Date.today.to_s])
+    end
+    def upcoming
+      find(:all, :conditions => ["due > ? and complete is null", Date.today.to_s])
+    end
+  end
+  
+  has_many :tags
 end
