@@ -1,18 +1,15 @@
 class TasksController < ApplicationController
     def index
-        if params[:tag]
-            @tasks = Task.tagged_with(params[:tag])
-        else
-        @tasks = Task.all 
-        end
+        @incomplete_tasks = Task.where(complete: false)
+        @complete_tasks = Task.where(complete: true)
     end
 
     def show
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
     end
 
     def new
-        @task = Task.new
+        @task = current_user.tasks.build
     end
 
     def edit
@@ -20,7 +17,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new(task_params)
+        @task = current_user.tasks.build(task_params)
 
         if @task.save
         redirect_to @task
@@ -45,9 +42,16 @@ class TasksController < ApplicationController
 
         redirect_to tasks_path
     end
+
+    def complete
+        @task = current_user.tasks.find(params[:id])
+        @task.update_attribute(:complete, true)
+        flash[:notice] = "Task Marked as Complete"
+        redirect_to tasks_path
+    end
     
     private 
         def task_params
-            params.require(:task).permit(:item, :description, :tag_list, :completed)
+            params.require(:task).permit(:item, :description, :tag_list, :due)  
         end
 end
