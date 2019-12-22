@@ -31,8 +31,8 @@
     </p> 
 
     <p>
-        <%= form.label :tag_list %><br>
-        <%= form.text_field :tag_list %>
+        <%= form.label :tag_list, "Tags (seperated by commas)" %><br>
+        <%= form.text_field :tag_list, value: form.object.tag_list.to_s %>
     </p>
     
     <p>

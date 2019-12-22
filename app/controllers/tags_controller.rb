@@ -1,9 +1,11 @@
 class TagsController < ApplicationController
     def show
-        @tag = Tag.find(params[:id])
-    end
+        @tag =  ActsAsTaggableOn::Tag.find(params[:id])
+        @tasks = Task.tagged_with(@tag.name)
+      end
 
     def index
-        @tag = Tag.all 
+        @tags = ActsAsTaggableOn::Tag.all
     end
+
 end

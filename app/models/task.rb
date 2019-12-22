@@ -1,26 +1,12 @@
 require 'chronic'
 
 class Task < ApplicationRecord
-    has_many :taggings, dependent: :destroy
-    has_many :tags, through: :taggings
+    attr_accessor :item, :description, :tag_list
+    acts_as_taggable_on :tasks
     validates :item, presence: true,
                      length: { minimum: 5 } 
     belongs_to :user
     validate :due_date_cannot_be_in_the_past
-
-    def self.tagged_with(name)
-        Tag.find_by!(name: name).tasks
-    end
-    
-    def tag_list
-        tags.map(&:name).join(" ")
-    end
-    
-    def tag_list=(names)
-        self.tags = names.split(" ").map do |name|
-            Tag.where(name: name).first_or_create!
-        end
-    end
 
     def due_date
         due.to_s

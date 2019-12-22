@@ -10,9 +10,8 @@
 
 <p>
     <strong>Tags:</strong>
-   <% @task.tags.each do |tag| %>
+   <% @tasks.tag_list %>
         <%= link_to tag.name, tag_path(tag) %>
-   <% end %>
 </p>
 
 <p>

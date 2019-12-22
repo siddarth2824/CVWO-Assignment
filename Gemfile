@@ -6,6 +6,7 @@ ruby '2.6.5'
 gem 'devise'
 gem "chronic", "~> 0.10.2"
 gem "dynamic_form"
+gem 'acts-as-taggable-on', '~> 6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2'
