@@ -1,13 +1,14 @@
 require 'chronic'
 
 class Task < ApplicationRecord
-    has_many :taggings, dependent: :destroy
-    has_many :tags, through: :taggings
+    attr_accessor :item, :description, :tag_list
+    acts_as_taggable_on :tasks
     validates :item, presence: true,
                      length: { minimum: 5 } 
     belongs_to :user
     validate :due_date_cannot_be_in_the_past
 
+<<<<<<< HEAD
     accepts_nested_attributes_for :tags
 
     def self.tagged_with(name)
@@ -26,6 +27,8 @@ class Task < ApplicationRecord
         self.tags = new_or_found_tags
     end
 
+=======
+>>>>>>> 8fe445ae8b398d0562b4ec663dd5069df9a43f3a
     def due_date
         due.to_s
     end
