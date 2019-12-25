@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
     def index
-        @incomplete_tasks = Task.where(complete: false)
-        @complete_tasks = Task.where(complete: true)
+        @incomplete_tasks = current_user.tasks.where(complete: false)
+        @complete_tasks = current_user.task.where(complete: true)
     end
 
     def show
