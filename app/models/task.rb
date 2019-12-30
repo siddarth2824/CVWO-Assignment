@@ -3,8 +3,7 @@ require 'chronic'
 class Task < ApplicationRecord
     has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
-    validates :item, presence: true,
-                     length: { minimum: 5 } 
+    validates :item, presence: true
     belongs_to :user
     validate :due_date_cannot_be_in_the_past
 

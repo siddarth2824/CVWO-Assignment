@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
     def index
         @incomplete_tasks = current_user.tasks.where(complete: false)
-        @complete_tasks = current_user.task.where(complete: true)
+        @complete_tasks = current_user.tasks.where(complete: true)
     end
 
     def show
@@ -13,7 +13,7 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
     end
 
     def create
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     end
 
     def update
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
 
         if @task.update(task_params)
             redirect_to @task
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
         @task.destroy
 
         redirect_to tasks_path

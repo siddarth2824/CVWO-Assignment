@@ -3,7 +3,9 @@ class CreateTasks < ActiveRecord::Migration[6.0]
     create_table :tasks do |t|
       t.string :item
       t.text :description
-      t.datetime :due
+      t.date :due
+      t.boolean :complete, null: false, default: false
+      t.belongs_to :user
 
       t.timestamps
     end

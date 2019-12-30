@@ -6,14 +6,6 @@ class User < ApplicationRecord
   
   require 'chronic'
   
-  has_many :tasks do
-    def today 
-      find(:all, :conditions => ["due = ? and complete is null", Date.today.to_s])
-    end
-    def upcoming
-      find(:all, :conditions => ["due > ? and complete is null", Date.today.to_s])
-    end
-  end
-  
+  has_many :tasks 
   has_many :tags
 end

@@ -34,6 +34,8 @@
         <%= form.label :tag_list %><br>
         <%= form.text_field :tag_list %>
     </p>
+
+    <%= hidden_field_tag 'user_id', @user_id %>
     
     <p>
         <%= form.submit %>
